@@ -21,4 +21,18 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+
 	move_and_slide()
+func die():
+	get_tree().reload_current_scene()
+	
+
+
+func _on_death_zone_body_entered(body: Node2D) -> void:
+	if body == self:
+		die()
+
+
+func _on_win_zone_body_entered(body: Node2D) -> void:
+	if body == self:
+		get_tree().change_scene_to_file("res://win_screen.tscn")
